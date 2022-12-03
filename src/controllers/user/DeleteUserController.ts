@@ -5,8 +5,8 @@ class DeleteUserController {
     async handle(req: Request, res: Response) {
         const { userid } = req.body;
         const deleteUserService = new DeleteUserService();
-        const users = await deleteUserService.execute({userid});
-        return res.json(users);
+        const user = await deleteUserService.execute({userid});
+        return res.json(user);
     }
 }
 
