@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:pass@localhost:5432/rendezvous?schema=public"
+}
+
+model categorias {
+  categoriaid   Int        @id @default(autoincrement())
+  nomecategoria String?    @db.VarChar(50)
+  criacao       DateTime?  @default(now()) @db.Timestamp(6)
+  alteracao     DateTime?  @default(now()) @db.Timestamp(6)
+  produtos      produtos[]
+}
+
+model comandas {
+  comandaid Int     @id @default(autoincrement())
+  mesa      String? @db.Char(2)
+  status    String? @db.VarChar(15)
+  userid    Int     @default(autoincrement())
+  users     users   @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "fk_user")
+  itens     itens[]
+}
+
+model itens {
+  iditem     Int      @id @default(autoincrement())
+  quantidade Int?
+  comandaid  Int      @default(autoincrement())
+  produtoid  Int      @default(autoincrement())
+  comandas   comandas @relation(fields: [comandaid], references: [comandaid], onDelete: NoAction, onUpdate: NoAction, map: "fk_comanda")
+  produtos   produtos @relation(fields: [produtoid], references: [produtoid], onDelete: NoAction, onUpdate: NoAction, map: "fk_produto")
+}
+
+model produtos {
+  produtoid        Int        @id @default(autoincrement())
+  categoriaid      Int        @default(autoincrement())
+  nomeproduto      String?    @db.VarChar(50)
+  preco            Decimal?   @db.Decimal(7, 2)
+  descricaoproduto String?    @db.VarChar(150)
+  criacao          DateTime?  @default(now()) @db.Timestamp(6)
+  alteracao        DateTime?  @default(now()) @db.Timestamp(6)
+  itens            itens[]
+  categorias       categorias @relation(fields: [categoriaid], references: [categoriaid], onDelete: NoAction, onUpdate: NoAction, map: "fk_categoria")
+}
+
+model users {
+  userid     Int        @id @default(autoincrement())
+  nomeuser   String?    @db.VarChar(50)
+  senha      String     @db.VarChar(30)
+  perfiluser String     @db.Char(1)
+  criacao    DateTime?  @default(now()) @db.Timestamp(6)
+  alteracao  DateTime?  @default(now()) @db.Timestamp(6)
+  comandas   comandas[]
+}
