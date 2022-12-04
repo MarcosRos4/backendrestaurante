@@ -1,16 +1,10 @@
 import prismaClient from '../../prisma';
 
-interface UserRequest {
-    userid: number;
 
-}
 class ListExactUserService {
-    async execute({ userid }: UserRequest) {
-        const ExactUser = await prismaClient.users.findUnique({
-            where: {
-                userid:userid
-            }
-        })
+    async execute({ userid }) {
+        const ExactUser = await prismaClient.users.findFirst({"userid":12})
+        console.log("Usuario "+userid+" acessado")
         return ExactUser;
     }
 }

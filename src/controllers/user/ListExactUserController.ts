@@ -2,12 +2,10 @@ import { Request, Response } from 'express';
 import { ListExactUserService } from '../../services/user/ListExactUserService';
 
 class ListExactUserController {
-    async handle(req: Request, res: Response) {
-        const { userid} = req.body;
-        const listExactUser = new ListExactUserService();
-        const user = await listExactUser.execute({ userid });
+    async handle(req:Request, res: Response) {
 
-        return res.json(user);
+    const userid = req.params.userid
+    
     }
 }
 

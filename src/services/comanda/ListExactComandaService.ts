@@ -11,6 +11,7 @@ class ListExactComandaService {
                comandaid:comandaid
             }
         })
+        console.log("Comanda "+comandaid+" acessado")
         return ExactComanda;
     }
 }

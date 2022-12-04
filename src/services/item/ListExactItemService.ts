@@ -11,6 +11,7 @@ class ListExactItemService {
                iditem:iditem
             }
         })
+        console.log("Item "+iditem+" acessado")
         return ExactItem;
     }
 }

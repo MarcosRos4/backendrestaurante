@@ -6,6 +6,8 @@ const app = express();
 app.use(express.json()); //utilizando JSON
 app.use(cors());
 app.use(router);
+
+
 /*
 * tratando erro
 *IMPORTANTE: todas as rotas passam por este "middleware"
