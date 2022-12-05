@@ -15,12 +15,17 @@ import { ListAllUserController }      from "./controllers/user/ListAllUserContro
 import { ListallProdutoController }   from "./controllers/produto/ListallProdutoController";
 import { ListAllItemController }      from "./controllers/item/ListAllItemController";
 import { ListAllComandaController }   from "./controllers/comanda/ListAllComandaController";
+import { UpdateUserController } from "./controllers/user/UpdateUserController";
+import { UpdateItemController } from "./controllers/item/UpdateItemController";
+import { ListAllCategoriaController } from "./controllers/categoria/ListAllCategoriaController";
+import { UpdateCategoriaController } from "./controllers/categoria/UpdateCategoriaController";
 const router = Router();
 
 //Rotas USER ------------
 router.post(   '/users',   new CreateUserController(       ).handle)   // criar
 router.delete( '/users',   new DeleteUserController(       ).handle)   // apagar
-router.get(     '/users' , new ListAllUserController(      ).handle)
+router.get(     '/users' , new ListAllUserController(      ).handle)   // procurar
+router.put(    '/users',   new UpdateUserController(    ).handle)      // atualizar
 
 //ROTAS PRODUTOS
 router.post(   '/produtos',new CreateProdutoController(    ).handle)   // criar
@@ -31,7 +36,8 @@ router.get(    '/produtos',new ListallProdutoController(   ).handle)   // procur
 //ROTAS ITENS
 router.post(   '/itens',   new CreateItemController(       ).handle)   // criar          
 router.delete( '/itens',   new DeleteItemController(       ).handle)   // apagar  
-router.get(    '/itens',   new ListAllItemController(      ).handle)   // procurar   
+router.get(    '/itens',   new ListAllItemController(      ).handle)   // procurar  
+router.put(    '/itens',   new UpdateItemController(    ).handle)   // atualizar 
 
 //ROTAS COMANDAS
 router.post(  '/comandas', new CreateComandaController(    ).handle)   // criar
@@ -42,5 +48,7 @@ router.get(   '/comandas', new ListAllComandaController(   ).handle)   // procur
 //ROTAS CATEGORIAS
 router.post(  '/categorias',new CreateCategoriaController( ).handle)   // criar 
 router.delete('/categorias',new DeleteCategoriaController( ).handle)   // apagar
+router.put(    '/categorias',new UpdateCategoriaController(    ).handle)   // atualizar
+router.get(    '/categorias',new ListAllCategoriaController(    ).handle)   // atualizar
 
 export { router };

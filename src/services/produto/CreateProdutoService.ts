@@ -17,7 +17,7 @@ class CreateProdutoService {
                 categoriaid:categoria
             }
         });
-        console.log("Pruduto foi cadastrado");
+        console.log("Produto foi cadastrado");
         return produtos;
     }
 }
